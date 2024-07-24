@@ -1,5 +1,7 @@
 # GenClimb
 
+Try it out at [genclimb.com](https://www.genclimb.com/)
+
 GenClimb is a generative AI model designed to create climbing routes for Standardized Interactive Climbing Training Boards (SICTBs). Utilizing a seq2seq transformer architecture, GenClimb generates climbs conditioned on specific board layouts and difficulty levels.
 
 **Currently, only Kilter Boards are supported.**

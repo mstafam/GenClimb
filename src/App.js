@@ -22,7 +22,7 @@ function App() {
   const [topK, setTopK] = useState(50);
   const [topP, setTopP] = useState(0.9);
   const [isWebGPUSupported, setIsWebGPUSupported] = useState(null);
-
+  const [showNotice, setShowNotice] = useState(true);
 
   // Check for browser WebGPU support 
   useEffect(() => {
@@ -132,13 +132,34 @@ function App() {
 
   return (
     <main className="min-h-screen bg-gray-900 p-4">
-      <div className="max-w-7xl mx-auto bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+      {showNotice && (
+        <div className="bg-gray-700 text-gray-200 p-2 rounded-md mb-4 text-xs flex justify-between items-center">
+          <span>For better results, enable Strict Validation in Advanced Options. Note: This may increase generation time.</span>
+          <button 
+            onClick={() => setShowNotice(false)} 
+            className="ml-2 text-gray-400 hover:text-gray-200"
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+          </button>
+        </div>
+      )}
         <div className="flex flex-col md:flex-row">
           {/* Left side - Input */}
           <div className="w-full md:w-1/2 p-6 bg-gray-800 border-r border-gray-700">
           <div className="text-sm text-center mb-4 text-gray-400">
           {isWebGPUSupported === null && "Checking WebGPU support..."}
-          {isWebGPUSupported === false && "WebGPU is not supported in this browser. Please use ... to generate climbs."}
+          {isWebGPUSupported === false && (
+            <>
+              WebGPU is not supported in this browser. Generally, Chrome, Edge, and Safari (on MacOS) are supported. See full list of 
+              <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#browser_compatibility" 
+                className="text-blue-400 hover:text-blue-300 ml-1" 
+                target="_blank" 
+                rel="noopener noreferrer">supported browsers</a>.
+            </>
+          )}
           {isWebGPUSupported === true && "WebGPU is supported in this browser!"}
           </div>
             <h1 className="text-6xl md:text6xl text-center mb-6 font-extrabold bg-clip-text text-transparent bg-[linear-gradient(to_right,theme(colors.green.300),theme(colors.green.100),theme(colors.sky.400),theme(colors.yellow.200),theme(colors.sky.400),theme(colors.green.100),theme(colors.green.300))] bg-[length:200%_auto] animate-gradient">GENCLIMB</h1>
