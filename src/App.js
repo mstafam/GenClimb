@@ -184,7 +184,7 @@ function App() {
               onChange={handleModelChange}
             >
               <option value={"tiny"}>Tiny Quantized (Faster, Less Accurate)</option>
-              <option value={"large"}>Large Quantized (Slower, More Accurate)</option>
+              <option value={"large"} disabled>Large Quantized (Slower, More Accurate)</option>
               <option disabled>Full-precision</option>
             </select>
           </div>

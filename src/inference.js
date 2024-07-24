@@ -10,8 +10,7 @@ const id_to_token_path = './static/id_to_token.json';
 const placements_path = './static/placements.json';
 const roles_path = './static/roles.json';
 const layoutInfo_path = './static/layoutInfo.json';
-const model_large_url= "./static/GenClimb_Large_int8.onnx";
-const model_tiny_url = "./static/GenClimb_Tiny_int8.onnx";
+const model_url = "./static/GenClimb_Tiny_int8.onnx";
 const vocab_size = 1279;
 let regen = 0;
 
@@ -234,12 +233,11 @@ export async function Inference(src, tgt, temp, samplingMethod, k=5, p=0.9, mode
     const model_input = await getIds(src, tgt);
 
     // Determine which model to run
-    let model_url;
-    if (model === "tiny") {
-        model_url = model_tiny_url;
-    } else if (model === "large") {
-        model_url = model_large_url;
-    }
+    // if (model === "tiny") {
+    //     model_url = model_tiny_url;
+    // } else if (model === "large") {
+    //     model_url = model_large_url;
+    // }
 
     // Run the session
     const session = await ort.InferenceSession.create(model_url, options);
