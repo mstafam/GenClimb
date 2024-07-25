@@ -153,12 +153,14 @@ function App() {
           {isWebGPUSupported === null && "Checking WebGPU support..."}
           {isWebGPUSupported === false && (
             <>
-              WebGPU is not supported in this browser. Generally, Chrome, Edge, and Safari (on MacOS) are supported. See full list of 
-              <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#browser_compatibility" 
-                className="text-blue-400 hover:text-blue-300 ml-1" 
-                target="_blank" 
-                rel="noopener noreferrer">supported browsers</a>.
-            </>
+            WebGPU is not supported in this browser. GenClimb works on most modern desktop browsers (Chrome, Edge, Safari on macOS), but generally not on mobile devices. 
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#browser_compatibility" 
+               className="text-blue-400 hover:text-blue-300 ml-1" 
+               target="_blank" 
+               rel="noopener noreferrer">
+              See compatible browsers
+            </a>.
+          </>
           )}
           {isWebGPUSupported === true && "WebGPU is supported in this browser!"}
           </div>
