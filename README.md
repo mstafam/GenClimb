@@ -14,7 +14,7 @@ GenClimb performs inferencing directly in your browser, using your device's GPU 
 - **Performance**: Utilizes ONNX Runtime Web for efficient, GPU-accelerated inference.
 - **Edge Computing**: Brings AI directly to your device, eliminating the need for server-side processing.
 
-## Model Details: GenClimb-Large-Quantized
+## Model Details: GenClimb-Tiny-Quantized
 
 The model is quantized to int8 for improved efficiency.
 
@@ -23,7 +23,7 @@ The model is quantized to int8 for improved efficiency.
 - Number of Heads: 4
 - Number of Layers: 2
 - Feed-Forward Dimension: 256
-- Dropout: 0.1
+- Dropout: 0.3
 - Activation Function: GELU
 - Layer Normalization Epsilon: 1e-5
 
@@ -31,13 +31,9 @@ The model is quantized to int8 for improved efficiency.
 - Device: CUDA
 - Learning Rate: 1e-4
 - Epochs: 8
-- Weight Decay: 0.01
-- Batch Size: 32
+- Weight Decay: 0.015
+- Batch Size: 64
 - Train/Test Split: 90/10
-
-### Performance Metrics
-- Training Time: 12 hours and 6 minutes (1x NVIDIA GeForce RTX 3070)
-- Final Loss: 2.114803
 
 ## Resources
 
