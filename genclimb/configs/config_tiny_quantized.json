@@ -1,0 +1,17 @@
+{
+    "train_split": 0.9,
+    "batch_size": 64,
+    "dim": 256,
+    "num_heads": 4,
+    "num_layers": 2,
+    "ff_dim": 256,
+    "dropout": 0.3,
+    "activation": "gelu",
+    "layer_norm_eps": 1e-5,
+    "batch_first": true,
+    "norm_first": false,
+    "device": "cuda",
+    "learning_rate": 1e-4,
+    "epochs": 8,
+    "weigh_decay": 0.015
+}
