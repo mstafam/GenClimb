@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Inference } from './inference.js';
 import * as React from 'react';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -21,31 +21,7 @@ function App() {
   const [samplingMethod, setSamplingMethod] = useState('Multinomial');
   const [topK, setTopK] = useState(50);
   const [topP, setTopP] = useState(0.9);
-  const [isWebGPUSupported, setIsWebGPUSupported] = useState(null);
   const [showNotice, setShowNotice] = useState(true);
-
-  // Check for browser WebGPU support 
-  useEffect(() => {
-    const checkWebGPUSupport = async () => {
-      if (!navigator.gpu) {
-        setIsWebGPUSupported(false);
-        return
-      }
-      try {
-        const adapter = await navigator.gpu.requestAdapter();
-        if (!adapter) {
-          setIsWebGPUSupported(false);
-          return
-        }
-        setIsWebGPUSupported(true);
-      } catch (e) {
-        setIsWebGPUSupported(false);
-      }
-    };
-
-    checkWebGPUSupport();
-  }, []);
-
   
   const changeSelectedBoard = (event) => {
     setSelectedBoard(event.target.value);
@@ -109,10 +85,6 @@ function App() {
   // Run inference and set the returned states
   const handleGenerate = async (event) => {
     event.preventDefault();
-    if (!isWebGPUSupported) {
-      alert("WebGPU is not supported in this browser. Please use a WebGPU-compatible browser to generate climbs.");
-      return
-    }
     setIsLoading(true);
     try {
       const start = performance.now();
@@ -150,19 +122,6 @@ function App() {
           {/* Left side - Input */}
           <div className="w-full md:w-1/2 p-6 bg-gray-800 border-r border-gray-700">
           <div className="text-sm text-center mb-4 text-gray-400">
-          {isWebGPUSupported === null && "Checking WebGPU support..."}
-          {isWebGPUSupported === false && (
-            <>
-            WebGPU is not supported in this browser. GenClimb works on most modern desktop browsers (Chrome, Edge, Safari on macOS), but generally not on mobile devices. 
-            <a href="https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API#browser_compatibility" 
-               className="text-blue-400 hover:text-blue-300 ml-1" 
-               target="_blank" 
-               rel="noopener noreferrer">
-              See compatible browsers
-            </a>.
-          </>
-          )}
-          {isWebGPUSupported === true && "WebGPU is supported in this browser!"}
           </div>
             <h1 className="text-6xl md:text6xl text-center mb-6 font-extrabold bg-clip-text text-transparent bg-[linear-gradient(to_right,theme(colors.green.300),theme(colors.green.100),theme(colors.sky.400),theme(colors.yellow.200),theme(colors.sky.400),theme(colors.green.100),theme(colors.green.300))] bg-[length:200%_auto] animate-gradient">GENCLIMB</h1>
             <form onSubmit={handleGenerate} className="space-y-4">
@@ -285,12 +244,7 @@ function App() {
     </div>
               <button 
                 type="submit"
-                className={`w-full py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 ${
-                  isWebGPUSupported
-                    ? "bg-blue-600 text-white hover:bg-blue-700"
-                    : "bg-gray-500 text-gray-300 cursor-not-allowed"
-                }`}
-                disabled={!isWebGPUSupported}
+                className={`w-full py-2 px-4 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800 bg-blue-600 text-white hover:bg-blue-700"`}
               >
                 Generate
               </button>
@@ -302,7 +256,7 @@ function App() {
                   <span className="group relative">
                     How it works
                     <span className="absolute left-0 bottom-full mb-2 hidden group-hover:block bg-gray-700 text-white text-xs p-2 rounded shadow-lg w-64">
-                      GenClimb creates climbs right in your browser, using your device's GPU through WebGPU API. It's free to use, keeps your data private, and works best with modern browsers and graphics cards.
+                    GenClimb creates climbs right in your browser using WebAssembly. It's free to use, keeps your data private, and works on most modern browsers.
                     </span>
                   </span>
                 </span>

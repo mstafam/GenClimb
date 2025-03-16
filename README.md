@@ -8,10 +8,10 @@ GenClimb is a generative AI model designed to create climbing routes for Standar
 
 ## Inferencing
 
-GenClimb performs inferencing directly in your browser, using your device's GPU through the WebGPU API. This approach offers several benefits:
+GenClimb performs inferencing directly in your browser, using WebAssembly. This approach offers several benefits:
 
 - **Privacy**: Your data stays on your device, with no information sent to external servers.
-- **Performance**: Utilizes ONNX Runtime Web for efficient, GPU-accelerated inference.
+- **Performance**: Utilizes ONNX Runtime Web for efficient, on-device inference.
 - **Edge Computing**: Brings AI directly to your device, eliminating the need for server-side processing.
 
 ## Model Details: GenClimb-Tiny-Quantized
